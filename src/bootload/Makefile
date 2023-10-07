@@ -1,4 +1,4 @@
-PREFIX  = /home/pojiro/TomboWorks/project/step12/local
+PREFIX  = $(HOME)/TomboWorks/project/step12/local
 ARCH    = h8300-elf
 BINDIR  = $(PREFIX)/bin
 ADDNAME = $(ARCH)-
