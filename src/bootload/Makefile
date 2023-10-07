@@ -31,6 +31,7 @@ LFLAGS  = -static -T ld.scr -L.
 .SUFFIXES: .c .o
 .SUFFIXES: .s .o
 
+.PHONY: all
 all : $(TARGET)
 
 $(TARGET) : $(OBJS)
@@ -47,10 +48,13 @@ $(TARGET) : $(OBJS)
 $(TARGET).mot : $(TARGET)
 	$(OBJCOPY) -O srec $(TARGET) $(TARGET).mot
 
+.PHONY: image
 image : $(TARGET).mot
 
+.PHONY: write
 write : $(TARGET).mot
 	$(H8WRITE) -3069 -f20 $(TARGET).mot $(H8WRITE_SERDEV)
 
+.PHONY: clean
 clean :
 	rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
