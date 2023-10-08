@@ -7,6 +7,11 @@ int main(void) {
 
   puts((unsigned char *)"Hello World!\n");
 
+  // clang-format off
+  putxval(0x10, 0);   puts((unsigned char *)"\n");
+  putxval(0xffff, 0); puts((unsigned char *)"\n");
+  // clang-format on
+
   while (1)
     ;
 
