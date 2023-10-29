@@ -72,15 +72,36 @@ int strncmp(const char *s1, const char *s2, int len) {
   return 0;
 }
 
-int putc(unsigned char c) {
+int putc(char c) {
   if (c == '\n') serial_send_byte(SERIAL_DEFAULT_DEVICE, '\r');
   return serial_send_byte(SERIAL_DEFAULT_DEVICE, c);
+}
+
+char getc(void) {
+  char c = serial_recv_byte(SERIAL_DEFAULT_DEVICE);
+
+  c = (c == '\r') ? '\n' : c;
+  putc(c); /* エコー・バック*/
+  return c;
 }
 
 int puts(const char *str) {
   while (*str)
     putc(*(str++));
   return 0;
+}
+
+int gets(char *buf) {
+  int i = 0;
+  char c;
+
+  do {
+    c = getc();
+    if (c == '\n') c = '\0';
+    buf[i++] = c;
+  } while (c);
+
+  return i - 1;
 }
 
 int putxval(unsigned long value, int column) {
