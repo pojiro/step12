@@ -1,1 +1,1 @@
-int elf_load(char *buf);
+char *elf_load(char *buf);
